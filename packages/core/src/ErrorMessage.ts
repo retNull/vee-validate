@@ -11,11 +11,20 @@ export const ErrorMessage = defineComponent({
       type: String,
       required: true,
     },
+    displayName: {
+      type: String,
+      default: undefined,
+    },
   },
   setup(props, ctx) {
     const errors = (inject('$_veeFormErrors', undefined) as unknown) as Ref<Record<string, string>>;
     const message = computed<string | undefined>(() => {
-      return errors.value[props.name];
+      let message = errors.value[props.name];
+      if (props.displayName && message) {
+        message = message.replace(props.name, props.displayName);
+      }
+
+      return message;
     });
 
     return () => {

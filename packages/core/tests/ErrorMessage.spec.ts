@@ -115,4 +115,24 @@ describe('<ErrorMessage />', () => {
 
     expect(input.getAttribute('aria-describedBy')).toBe(error.id);
   });
+
+  test('displays a pretty name', async () => {
+    const wrapper = mountWithHoc({
+      components: {
+        ErrorMessage,
+      },
+      template: `
+      <VForm as="form">
+        <Field name="field" rules="required" as="input" immediate />
+        <ErrorMessage name="field" display-name="name" as="span" />
+
+        <button>Validate</button>
+      </VForm>
+    `,
+    });
+
+    await flushPromises();
+    const error = wrapper.$el.querySelector('span');
+    expect(error.textContent).toBe(REQUIRED_MESSAGE.replace('field', 'name'));
+  });
 });
