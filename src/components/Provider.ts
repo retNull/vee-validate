@@ -283,7 +283,6 @@ export const ValidationProvider = (Vue as withProviderPrivates).extend({
 
       this.setFlags({
         pending: false,
-        pendingDebounce: false,
         valid: result.valid,
         invalid: !result.valid
       });
@@ -303,6 +302,7 @@ export const ValidationProvider = (Vue as withProviderPrivates).extend({
         invalid: !!errors.length,
         failed: !!errors.length,
         validated: true,
+        pendingDebounce: false,
         changed: this.value !== this.initialValue
       });
     },
