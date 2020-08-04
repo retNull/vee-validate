@@ -748,6 +748,33 @@ test('validation can be debounced', async () => {
   expect(error.text()).toBe(DEFAULT_REQUIRED_MESSAGE);
 });
 
+test('pendingDebounce gets set properly', async () => {
+  const wrapper = mount(
+    {
+      data: () => ({
+        value: ''
+      }),
+      template: `
+        <ValidationProvider ref="provider" rules="required" :debounce="50" v-slot="{ pendingDebounce }">
+          <input v-model="value" type="text">
+          <p>{{pendingDebounce}}</p>
+        </ValidationProvider>
+      `
+    },
+    { localVue: Vue, sync: false }
+  );
+
+  const input = wrapper.find('input');
+  const pendingDebounce = wrapper.find('p');
+
+  input.setValue('');
+  await sleep(40);
+  expect(pendingDebounce.text()).toBe('true');
+  await sleep(10);
+  await flushPromises();
+  expect(pendingDebounce.text()).toBe('false');
+});
+
 test('reset ignores pending validation result', async () => {
   const wrapper = mount(
     {
