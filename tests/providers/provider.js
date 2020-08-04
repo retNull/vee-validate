@@ -755,7 +755,7 @@ test('pendingDebounce gets set properly', async () => {
         value: ''
       }),
       template: `
-        <ValidationProvider ref="provider" rules="required" :debounce="50" v-slot="{ pendingDebounce }">
+        <ValidationProvider rules="required" :debounce="50" v-slot="{ pendingDebounce }">
           <input v-model="value" type="text">
           <p>{{pendingDebounce}}</p>
         </ValidationProvider>
