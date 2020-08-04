@@ -145,7 +145,7 @@ export function createCommonHandlers(vm: ProviderInstance) {
   // Handle debounce changes.
   if (!onValidate || vm.$veeDebounce !== vm.debounce) {
 
-    onValidate = () => {
+    onValidate = (...args: any[]) => {
       vm.setFlags({ pendingDebounce: true });
       return debounce(() => {
         vm.$nextTick(() => {
@@ -155,7 +155,7 @@ export function createCommonHandlers(vm: ProviderInstance) {
 
           vm._pendingReset = false;
         });
-      }, mode.debounce || vm.debounce)
+      }, mode.debounce || vm.debounce)(args);
     };
 
     // Cache the handler so we don't create it each time.
