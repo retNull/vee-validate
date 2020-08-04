@@ -283,6 +283,7 @@ export const ValidationProvider = (Vue as withProviderPrivates).extend({
 
       this.setFlags({
         pending: false,
+        pendingDebounce: false,
         valid: result.valid,
         invalid: !result.valid
       });

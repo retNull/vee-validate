@@ -144,15 +144,19 @@ export function createCommonHandlers(vm: ProviderInstance) {
 
   // Handle debounce changes.
   if (!onValidate || vm.$veeDebounce !== vm.debounce) {
-    onValidate = debounce(() => {
-      vm.$nextTick(() => {
-        if (!vm._pendingReset) {
-          triggerThreadSafeValidation(vm);
-        }
 
-        vm._pendingReset = false;
-      });
-    }, mode.debounce || vm.debounce);
+    onValidate = () => {
+      vm.setFlags({ pendingDebounce: true });
+      return debounce(() => {
+        vm.$nextTick(() => {
+          if (!vm._pendingReset) {
+            triggerThreadSafeValidation(vm);
+          }
+
+          vm._pendingReset = false;
+        });
+      }, mode.debounce || vm.debounce)
+    };
 
     // Cache the handler so we don't create it each time.
     vm.$veeHandler = onValidate;
