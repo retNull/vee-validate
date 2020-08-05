@@ -146,7 +146,7 @@ export function createCommonHandlers(vm: ProviderInstance) {
   if (!onValidate || vm.$veeDebounce !== vm.debounce) {
 
     onValidate = (...args: any[]) => {
-      vm.setFlags({ pendingDebounce: true });
+      vm.setFlags({ debouncing: true });
       return debounce(() => {
         vm.$nextTick(() => {
           if (!vm._pendingReset) {

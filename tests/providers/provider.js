@@ -748,16 +748,16 @@ test('validation can be debounced', async () => {
   expect(error.text()).toBe(DEFAULT_REQUIRED_MESSAGE);
 });
 
-test('pendingDebounce gets set properly', async () => {
+test('debouncing gets set properly', async () => {
   const wrapper = mount(
     {
       data: () => ({
         value: ''
       }),
       template: `
-        <ValidationProvider rules="required" :debounce="50" v-slot="{ pendingDebounce }">
+        <ValidationProvider rules="required" :debounce="50" v-slot="{ debouncing }">
           <input v-model="value" type="text">
-          <p>{{pendingDebounce}}</p>
+          <p>{{debouncing}}</p>
         </ValidationProvider>
       `
     },
@@ -765,14 +765,14 @@ test('pendingDebounce gets set properly', async () => {
   );
 
   const input = wrapper.find('input');
-  const pendingDebounce = wrapper.find('p');
+  const debouncing = wrapper.find('p');
 
   input.setValue('');
   await sleep(40);
-  expect(pendingDebounce.text()).toBe('true');
+  expect(debouncing.text()).toBe('true');
   await sleep(10);
   await flushPromises();
-  expect(pendingDebounce.text()).toBe('false');
+  expect(debouncing.text()).toBe('false');
 });
 
 test('reset ignores pending validation result', async () => {

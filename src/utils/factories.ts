@@ -10,7 +10,7 @@ export function createFlags(): ValidationFlags {
     invalid: false,
     validated: false,
     pending: false,
-    pendingDebounce: false,
+    debouncing: false,
     required: false,
     changed: false,
     passed: false,

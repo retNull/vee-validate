@@ -74,7 +74,7 @@ export interface ValidationFlags {
   failed: boolean;
   validated: boolean;
   pending: boolean;
-  pendingDebounce: boolean;
+  debouncing: boolean;
   required: boolean;
   changed: boolean;
   [x: string]: boolean | undefined;

@@ -302,7 +302,7 @@ export const ValidationProvider = (Vue as withProviderPrivates).extend({
         invalid: !!errors.length,
         failed: !!errors.length,
         validated: true,
-        pendingDebounce: false,
+        debouncing: false,
         changed: this.value !== this.initialValue
       });
     },
