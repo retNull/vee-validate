@@ -11,6 +11,7 @@
       pristine,
       dirty,
       pending,
+      pendingValidation,
       required,
       validated,
       passed,
@@ -27,6 +28,7 @@
       <li :class="`is-${pristine}`">pristine: {{ pristine }}</li>
       <li :class="`is-${dirty}`">dirty: {{ dirty }}</li>
       <li :class="`is-${pending}`">pending: {{ pending }}</li>
+      <li :class="`is-${pendingValidation}`">pendingValidation: {{ pendingValidation }}</li>
       <li :class="`is-${required}`">required: {{ required }}</li>
       <li :class="`is-${validated}`">validated: {{ validated }}</li>
       <li :class="`is-${passed}`">passed: {{ passed }}</li>
