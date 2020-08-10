@@ -15,6 +15,10 @@ export interface InteractionSetting {
 
 export type InteractionModeFactory = (ctx: ModeContext) => InteractionSetting;
 
+const input: InteractionModeFactory = () => ({
+  on: ['input']
+});
+
 const aggressive: InteractionModeFactory = () => ({
   on: ['input', 'blur']
 });
@@ -42,6 +46,7 @@ const passive: InteractionModeFactory = () => ({
 export const modes: { [k: string]: InteractionModeFactory } = {
   aggressive,
   eager,
+  input,
   passive,
   lazy
 };
