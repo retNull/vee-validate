@@ -12,6 +12,7 @@ const FLAGS_STRATEGIES: [KnownKeys<ValidationFlags>, 'every' | 'some'][] = [
   ['valid', 'every'],
   ['invalid', 'some'],
   ['pending', 'some'],
+  ['debouncing', 'some'],
   ['validated', 'every'],
   ['changed', 'some'],
   ['passed', 'every'],
@@ -32,6 +33,7 @@ interface ObserverField {
   valid: boolean;
   invalid: boolean;
   pending: boolean;
+  debouncing: boolean;
   validated: boolean;
   changed: boolean;
   passed: boolean;
